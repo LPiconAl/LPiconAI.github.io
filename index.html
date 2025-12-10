@@ -12,7 +12,8 @@
             --bg-dark: #0a0a12;
             --text-gold: #f0e6d2;
             --white: #ffffff;
-            --card-bg: rgba(30, 15, 30, 0.90); /* Fondo violeta oscuro estilo Canva */
+            --card-bg: rgba(94, 59, 99, 0.85);
+            --card-hover: rgba(114, 79, 119, 0.95);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -33,7 +34,7 @@
         .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 20px; text-align: center; }
         .hidden { display: none !important; }
 
-        /* --- BOTONES DE IDIOMA --- */
+        /* --- SELECTOR DE IDIOMA --- */
         .lang-container {
             position: fixed; top: 20px; right: 20px; z-index: 1000;
             background: rgba(0, 0, 0, 0.6); padding: 10px; border-radius: 30px;
@@ -45,125 +46,136 @@
         }
         .lang-btn:hover, .lang-btn.active { transform: scale(1.2); opacity: 1; }
 
-        /* --- ESTILOS TARJETAS ESTILO CANVA (PC & MÓVIL) --- */
-        .design-card {
-            background-color: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 40px;
-            text-align: left;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
-            margin-top: 20px;
-            color: var(--text-gold);
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .design-card h2 {
-            text-align: center;
-            border-bottom: 1px solid rgba(255,255,255,0.2);
-            padding-bottom: 20px;
-            margin-bottom: 30px;
-            font-size: 2rem;
-            color: var(--text-gold);
-        }
-
-        .design-card p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            margin-bottom: 20px;
-            color: #e0e0e0;
-        }
-
-        /* Layout para "Sobre Mí" en PC: Foto izq, texto der */
-        .about-layout {
+        /* --- DISEÑO DE GRID (Recreación Canva) --- */
+        .home-layout {
             display: flex;
-            gap: 40px;
-            align-items: flex-start;
+            gap: 30px;
+            max-width: 1100px;
+            margin: 40px auto;
+            align-items: stretch;
+            text-align: left;
         }
+
+        /* Columna Izquierda (Carta Grande + Frase) */
+        .left-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .main-title-pc {
+            font-size: 1.8rem;
+            color: var(--text-gold);
+            border-left: 4px solid #dba6f0;
+            padding-left: 15px;
+            margin-bottom: 10px;
+        }
+
+        .big-card {
+            background-color: var(--card-bg);
+            border-radius: 30px;
+            padding: 30px;
+            flex: 1; /* Ocupa el espacio disponible */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .big-card:hover { transform: scale(1.02); box-shadow: 0 0 20px rgba(112, 56, 130, 0.6); }
+        .big-card img { width: 100%; max-width: 200px; margin-bottom: 20px; filter: drop-shadow(0 0 10px rgba(0,0,0,0.3)); }
+        .big-card h3 { font-size: 1.5rem; color: var(--text-gold); border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 5px; text-align: center; }
+
+        .main-quote {
+            font-family: 'Cinzel', serif;
+            color: #ccc;
+            font-size: 1rem;
+            text-align: center;
+            line-height: 1.6;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        /* Columna Derecha (6 Cartas) */
+        .right-grid {
+            flex: 2;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .menu-card {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+            border: 1px solid rgba(255,255,255,0.1);
+            text-decoration: none;
+            height: 100%;
+        }
+        .menu-card:hover { transform: translateY(-5px); background-color: var(--card-hover); }
+        .menu-card img { height: 100px; width: auto; margin-bottom: 10px; filter: sepia(0.2); }
+        .menu-card h3 { font-size: 0.9rem; color: var(--text-gold); text-align: center; }
+
+        /* --- CONTENEDORES INTERNOS --- */
+        .design-card {
+            background-color: rgba(30, 15, 30, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px; padding: 40px; text-align: left;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6); margin-top: 20px;
+            color: var(--text-gold); max-width: 900px; margin: 0 auto;
+        }
+        .design-card h2 { text-align: center; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 20px; margin-bottom: 30px; font-size: 2rem; color: var(--text-gold); }
+        
+        .about-layout { display: flex; gap: 40px; align-items: flex-start; }
         .about-text { flex: 1; }
         .about-photos { flex: 1; display: flex; flex-direction: column; gap: 20px; }
-        .pc-photo {
-            width: 100%;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-            border: 1px solid rgba(240, 230, 210, 0.3);
-        }
+        .pc-photo { width: 100%; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); border: 1px solid rgba(240, 230, 210, 0.3); }
 
-        /* --- ESTILO "PAPEL MÁGICO" (ORÁCULO) --- */
+        /* --- ORÁCULO --- */
         .paper-note {
             background-color: #fdfbf7; color: #2c2c2c; padding: 40px;
-            max-width: 600px; margin: 40px auto;
-            font-family: 'Dancing Script', cursive; font-size: 1.6rem;
-            line-height: 1.5; text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5); transform: rotate(-1deg);
-            position: relative;
+            max-width: 600px; margin: 40px auto; font-family: 'Dancing Script', cursive;
+            font-size: 1.6rem; line-height: 1.5; text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); transform: rotate(-1deg); position: relative;
         }
-        .tape {
-            background-color: rgba(255, 255, 255, 0.4); width: 120px; height: 35px;
-            position: absolute; top: -15px; left: 50%;
-            transform: translateX(-50%) rotate(2deg);
-        }
-
-        .btn-reload, .btn-back, .btn-back-mobile {
-            cursor: pointer; font-family: 'Cinzel', serif; transition: all 0.3s;
-        }
-        .btn-reload {
-            margin-top: 20px; padding: 15px 30px;
-            background: var(--primary-purple); color: white;
-            border: 1px solid var(--text-gold); border-radius: 20px;
-        }
-        .btn-back {
-            background: transparent; border: 1px solid white; 
-            color: white; padding: 10px 25px; border-radius: 50px;
-            margin-bottom: 20px;
-        }
+        .tape { background-color: rgba(255, 255, 255, 0.4); width: 120px; height: 35px; position: absolute; top: -15px; left: 50%; transform: translateX(-50%) rotate(2deg); }
+        
+        .btn-reload, .btn-back, .btn-back-mobile { cursor: pointer; font-family: 'Cinzel', serif; transition: all 0.3s; }
+        .btn-reload { margin-top: 20px; padding: 15px 30px; background: var(--primary-purple); color: white; border: 1px solid var(--text-gold); border-radius: 20px; }
+        .btn-back { background: transparent; border: 1px solid white; color: white; padding: 10px 25px; border-radius: 50px; margin-bottom: 20px; }
         .btn-back:hover { background: white; color: black; }
 
-        /* --- RESPONSIVE --- */
-        @media (min-width: 769px) {
-            .mobile-only { display: none; }
-            .desktop-menu-container { position: relative; max-width: 900px; margin: 0 auto; }
-            .menu-img { width: 100%; display: block; border-radius: 20px; }
-            .click-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-            .click-area { position: absolute; cursor: pointer; border-radius: 12px; z-index: 10; }
-            
-            /* Posiciones PC */
-            .area-sobremi { top: 18%; left: 7%; width: 21%; height: 54%; }
-            .area-agenda { top: 8%; left: 30%; width: 20%; height: 38%; } 
-            .area-mensaje { top: 8%; left: 52%; width: 20%; height: 38%; } 
-            .area-amuletos { top: 8%; left: 74%; width: 20%; height: 38%; } 
-            .area-tarifas { top: 49%; left: 30%; width: 20%; height: 38%; } 
-            .area-testimonios { top: 49%; left: 52%; width: 20%; height: 38%; } 
-            .area-faq { top: 49%; left: 74%; width: 20%; height: 38%; } 
-        }
-
+        /* --- MÓVIL --- */
         @media (max-width: 768px) {
-            .desktop-only { display: none; }
+            .desktop-only { display: none; } 
+            .mobile-only { display: block; }
+            .home-layout { display: none; } /* Ocultar grid PC */
+            
             .mobile-container { padding: 15px; display: flex; flex-direction: column; align-items: center; }
             .lang-container { top: 10px; right: 10px; padding: 5px; }
 
-            .main-title {
-                font-size: 2rem; color: var(--text-gold); margin-bottom: 30px;
-                text-shadow: 0 0 10px rgba(240, 230, 210, 0.5);
-                border-bottom: 1px solid rgba(240, 230, 210, 0.3); padding-bottom: 10px; width: 100%; text-align: center;
-            }
+            .main-title { font-size: 2rem; color: var(--text-gold); margin-bottom: 30px; text-shadow: 0 0 10px rgba(240, 230, 210, 0.5); border-bottom: 1px solid rgba(240, 230, 210, 0.3); padding-bottom: 10px; width: 100%; text-align: center; }
 
-            .mobile-menu-list { display: flex; flex-direction: column; gap: 20px; width: 100%; }
-            .menu-item {
-                display: flex; align-items: center; background: rgba(10, 10, 18, 0.6);
-                border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 15px; padding: 15px;
-                text-decoration: none; color: var(--white);
-            }
+            .mobile-menu-list { display: flex; flex-direction: column; gap: 15px; width: 100%; }
+            .menu-item { display: flex; align-items: center; background: rgba(10, 10, 18, 0.6); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 15px; padding: 15px; text-decoration: none; color: var(--white); }
             .menu-icon { width: 50px; height: auto; margin-right: 20px; filter: sepia(0.2); }
             .menu-text h3 { font-size: 1.2rem; color: var(--text-gold); margin-bottom: 5px; text-align: left; }
             .menu-text p { font-size: 0.9rem; color: #ccc; text-align: left; }
-
-            .btn-back-mobile { background: transparent; border: 1px solid var(--white); color: var(--white); padding: 10px 20px; border-radius: 30px; margin-bottom: 20px; width: 100%; }
-            
-            /* Ajuste layout móvil para Sobre Mi */
             .about-layout { flex-direction: column-reverse; }
+            .btn-back-mobile { background: transparent; border: 1px solid var(--white); color: var(--white); padding: 10px 20px; border-radius: 30px; margin-bottom: 20px; width: 100%; }
+        }
+        @media (min-width: 769px) {
+            .mobile-only { display: none; }
         }
     </style>
 </head>
@@ -175,30 +187,88 @@
         <button class="lang-btn" onclick="setLanguage('fr')">🇫🇷</button>
     </div>
 
-    <div class="container desktop-only">
+    <div class="container">
         
-        <div id="desktop-home" class="desktop-section active">
-            <div class="desktop-menu-container">
-                <img src="menu-principal.png" alt="Menú Tarot" class="menu-img">
-                <div class="click-layer">
-                    <div class="click-area area-sobremi" onclick="showDesktopSection('desktop-sobre-mi')"></div>
-                    <a href="https://calendly.com/victoria-tarot/30min" class="click-area area-agenda" target="_blank"></a>
-                    <div class="click-area area-mensaje" onclick="showOracle()"></div>
-                    <div class="click-area area-amuletos" onclick="alert('Próximamente / Coming Soon / À venir')"></div>
-                    <div class="click-area area-tarifas" onclick="showDesktopSection('desktop-tarifas')"></div>
-                    <div class="click-area area-testimonios" onclick="alert('Próximamente / Coming Soon / À venir')"></div>
-                    <div class="click-area area-faq" onclick="showDesktopSection('desktop-faq')"></div>
+        <div id="desktop-home" class="desktop-section active home-layout">
+            
+            <div class="left-column">
+                <div class="main-title-pc tr-title">TAROT EVOLUTIVO</div>
+                
+                <div class="big-card" onclick="showSection('desktop-sobre-mi')">
+                    <img src="86008.png" alt="Sobre Mí"> <h3 class="tr-about">Sobre Mí</h3>
+                </div>
+
+                <div class="main-quote tr-quote">
+                    "LO QUE NO SE HACE CONSCIENTE, SE MANIFIESTA COMO DESTINO."
+                </div>
+            </div>
+
+            <div class="right-grid">
+                <a href="https://calendly.com/victoria-tarot/30min" target="_blank" class="menu-card">
+                    <img src="86003.png" alt="Agenda">
+                    <h3 class="tr-agenda">Agenda tu cita</h3>
+                </a>
+                
+                <div class="menu-card" onclick="showOracle()">
+                    <img src="86002.png" alt="Mensaje">
+                    <h3 class="tr-oracle">Mensaje del día</h3>
+                </div>
+
+                <div class="menu-card" onclick="alert('Próximamente / Coming Soon')">
+                    <img src="86005.png" alt="Amuletos">
+                    <h3 class="tr-amulets">Amuletos</h3>
+                </div>
+
+                <div class="menu-card" onclick="showSection('desktop-tarifas')">
+                    <img src="86004.png" alt="Tarifas">
+                    <h3 class="tr-rates">Tarifas</h3>
+                </div>
+
+                <div class="menu-card" onclick="alert('Próximamente / Coming Soon')">
+                    <img src="86007.png" alt="Testimonios">
+                    <h3 class="tr-testi">Testimonios</h3>
+                </div>
+
+                <div class="menu-card" onclick="showSection('desktop-faq')">
+                    <img src="86006.png" alt="FAQ">
+                    <h3 class="tr-faq">Preguntas</h3>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-home" class="mobile-only mobile-section">
+            <h1 class="main-title tr-title">TAROT EVOLUTIVO</h1>
+            <div class="mobile-menu-list">
+                <div class="menu-item" onclick="showSection('desktop-sobre-mi')">
+                    <img src="86008.png" class="menu-icon">
+                    <div class="menu-text"><h3 class="tr-about">Sobre Mí</h3><p class="tr-about-desc">Conoce mi historia.</p></div>
+                </div>
+                <a href="https://calendly.com/victoria-tarot/30min" target="_blank" class="menu-item" style="border-color: #f0e6d2; background: rgba(94, 59, 99, 0.6);">
+                    <img src="86003.png" class="menu-icon">
+                    <div class="menu-text"><h3 class="tr-agenda">Agenda tu cita</h3><p class="tr-agenda-desc">Reserva aquí.</p></div>
+                </a>
+                <div class="menu-item" onclick="showSection('desktop-tarifas')">
+                    <img src="86004.png" class="menu-icon">
+                    <div class="menu-text"><h3 class="tr-rates">Tarifas</h3><p class="tr-rates-desc">Opciones y precios.</p></div>
+                </div>
+                <div class="menu-item" onclick="showOracle()">
+                    <img src="86002.png" class="menu-icon">
+                    <div class="menu-text"><h3 class="tr-oracle">Mensaje del día</h3><p class="tr-oracle-desc">Un consejo del universo.</p></div>
+                </div>
+                <div class="menu-item" onclick="showSection('desktop-faq')">
+                    <img src="86006.png" class="menu-icon">
+                    <div class="menu-text"><h3 class="tr-faq">Preguntas</h3><p class="tr-faq-desc">Respuestas frecuentes.</p></div>
                 </div>
             </div>
         </div>
 
         <div id="desktop-sobre-mi" class="desktop-section hidden">
-            <button class="btn-back tr-back" onclick="showDesktopSection('desktop-home')">← Volver</button>
+            <button class="btn-back tr-back" onclick="goHome()">← Volver</button>
             <div class="design-card">
                 <div class="about-layout">
                     <div class="about-text">
                         <h2 class="tr-about">Sobre Mí</h2>
-                        <h3 class="tr-hi" style="margin-bottom:20px; color:#c7a0d6;">Hola, soy Victoria.</h3>
+                        <h3 class="tr-hi" style="color:#c7a0d6; margin-bottom:20px;">Hola, soy Victoria.</h3>
                         <p class="tr-bio-1">...</p>
                         <p class="tr-bio-2">...</p>
                     </div>
@@ -211,113 +281,20 @@
         </div>
 
         <div id="desktop-tarifas" class="desktop-section hidden">
-            <button class="btn-back tr-back" onclick="showDesktopSection('desktop-home')">← Volver</button>
+            <button class="btn-back tr-back" onclick="goHome()">← Volver</button>
             <div class="design-card">
                 <h2 class="tr-rates">Tarifas</h2>
                 <div style="text-align: left;">
-                    <h3 class="tr-t1-title" style="color:#d8bfd8;">...</h3>
-                    <p class="tr-t1-desc">...</p>
-                    <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); margin:15px 0;">
-                    
-                    <h3 class="tr-t2-title" style="color:#d8bfd8;">...</h3>
-                    <p class="tr-t2-desc">...</p>
-                    <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); margin:15px 0;">
-                    
-                    <h3 class="tr-t3-title" style="color:#d8bfd8;">...</h3>
-                    <p class="tr-t3-desc">...</p>
-                    <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); margin:15px 0;">
-                    
-                    <h3 class="tr-t4-title" style="color:#d8bfd8;">...</h3>
-                    <p class="tr-t4-desc">...</p>
-                </div>
-            </div>
-        </div>
-
-        <div id="desktop-faq" class="desktop-section hidden">
-            <button class="btn-back tr-back" onclick="showDesktopSection('desktop-home')">← Volver</button>
-            <div class="design-card">
-                <h2 class="tr-faq">Preguntas Frecuentes</h2>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; text-align: left;">
-                    <div>
-                        <h3 class="tr-q1" style="color:#c7a0d6; margin-bottom:10px;">...</h3>
-                        <p class="tr-a1">...</p>
-                    </div>
-                    <div>
-                        <h3 class="tr-q2" style="color:#c7a0d6; margin-bottom:10px;">...</h3>
-                        <p class="tr-a2">...</p>
-                    </div>
-                    <div style="grid-column: 1 / -1;">
-                        <h3 class="tr-q3" style="color:#c7a0d6; margin-bottom:10px;">...</h3>
-                        <p class="tr-a3">...</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div id="desktop-mensaje" class="desktop-section hidden">
-            <button class="btn-back tr-back" onclick="showDesktopSection('desktop-home')">← Volver</button>
-            <div class="paper-note">
-                <div class="tape"></div>
-                <p id="oracle-text-pc">...</p>
-            </div>
-            <button class="btn-reload tr-new-card" onclick="getNewMessage()">Sacar otra carta</button>
-        </div>
-    </div>
-
-
-    <div class="mobile-container mobile-only">
-        <div id="mobile-home" class="mobile-section">
-            <h1 class="main-title tr-title">TAROT EVOLUTIVO</h1>
-            <div class="mobile-menu-list">
-                <div class="menu-item" onclick="showMobileSection('mobile-sobre-mi')">
-                    <img src="86008.png" class="menu-icon">
-                    <div class="menu-text"><h3 class="tr-about">Sobre Mí</h3><p class="tr-about-desc">Conoce mi historia.</p></div>
-                </div>
-                <a href="https://calendly.com/victoria-tarot/30min" target="_blank" class="menu-item" style="border-color: #f0e6d2; background: rgba(94, 59, 99, 0.6);">
-                    <img src="86003.png" class="menu-icon">
-                    <div class="menu-text"><h3 class="tr-agenda">Agenda tu cita</h3><p class="tr-agenda-desc">Reserva aquí.</p></div>
-                </a>
-                <div class="menu-item" onclick="showMobileSection('mobile-tarifas')">
-                    <img src="86004.png" class="menu-icon">
-                    <div class="menu-text"><h3 class="tr-rates">Tarifas</h3><p class="tr-rates-desc">Opciones y precios.</p></div>
-                </div>
-                <div class="menu-item" onclick="showMobileOracle()"> 
-                    <img src="86002.png" class="menu-icon">
-                    <div class="menu-text"><h3 class="tr-oracle">Mensaje del día</h3><p class="tr-oracle-desc">Un consejo del universo.</p></div>
-                </div>
-                <div class="menu-item" onclick="showMobileSection('mobile-faq')">
-                    <img src="86006.png" class="menu-icon">
-                    <div class="menu-text"><h3 class="tr-faq">Preguntas</h3><p class="tr-faq-desc">Respuestas frecuentes.</p></div>
-                </div>
-            </div>
-        </div>
-
-        <div id="mobile-sobre-mi" class="mobile-section hidden">
-            <button class="btn-back-mobile tr-back" onclick="showMobileSection('mobile-home')">← Volver</button>
-            <div class="design-card">
-                <h2 class="tr-hi">Hola, soy Victoria.</h2>
-                <img src="foto1.jpg" class="pc-photo" style="margin-bottom:20px;">
-                <p class="tr-bio-1">...</p>
-                <img src="foto2.jpg" class="pc-photo" style="margin-bottom:20px;">
-                <p class="tr-bio-2">...</p>
-            </div>
-        </div>
-
-        <div id="mobile-tarifas" class="mobile-section hidden">
-            <button class="btn-back-mobile tr-back" onclick="showMobileSection('mobile-home')">← Volver</button>
-            <div class="design-card">
-                <h2 class="tr-rates">Mis Tarifas</h2>
-                <div style="text-align: left;">
-                    <h3 class="tr-t1-title" style="color:#d8bfd8;">...</h3><p class="tr-t1-desc">...</p><br>
-                    <h3 class="tr-t2-title" style="color:#d8bfd8;">...</h3><p class="tr-t2-desc">...</p><br>
-                    <h3 class="tr-t3-title" style="color:#d8bfd8;">...</h3><p class="tr-t3-desc">...</p><br>
+                    <h3 class="tr-t1-title" style="color:#d8bfd8;">...</h3><p class="tr-t1-desc">...</p><hr style="border-top:1px solid rgba(255,255,255,0.1); margin:15px 0;">
+                    <h3 class="tr-t2-title" style="color:#d8bfd8;">...</h3><p class="tr-t2-desc">...</p><hr style="border-top:1px solid rgba(255,255,255,0.1); margin:15px 0;">
+                    <h3 class="tr-t3-title" style="color:#d8bfd8;">...</h3><p class="tr-t3-desc">...</p><hr style="border-top:1px solid rgba(255,255,255,0.1); margin:15px 0;">
                     <h3 class="tr-t4-title" style="color:#d8bfd8;">...</h3><p class="tr-t4-desc">...</p>
                 </div>
             </div>
         </div>
 
-        <div id="mobile-faq" class="mobile-section hidden">
-            <button class="btn-back-mobile tr-back" onclick="showMobileSection('mobile-home')">← Volver</button>
+        <div id="desktop-faq" class="desktop-section hidden">
+            <button class="btn-back tr-back" onclick="goHome()">← Volver</button>
             <div class="design-card">
                 <h2 class="tr-faq">Preguntas</h2>
                 <div style="text-align: left;">
@@ -327,25 +304,29 @@
                 </div>
             </div>
         </div>
-
-        <div id="mobile-mensaje" class="mobile-section hidden">
-            <button class="btn-back-mobile tr-back" onclick="showMobileSection('mobile-home')">← Volver</button>
+        
+        <div id="desktop-mensaje" class="desktop-section hidden">
+            <button class="btn-back tr-back" onclick="goHome()">← Volver</button>
             <div class="paper-note">
                 <div class="tape"></div>
-                <p id="oracle-text-mobile">...</p>
+                <p id="oracle-text">...</p>
             </div>
-            <button class="btn-reload tr-new-card" onclick="getNewMessage()">✨ Sacar otra Carta</button>
+            <button class="btn-reload tr-new-card" onclick="getNewMessage()">Sacar otra carta</button>
         </div>
+
     </div>
 
     <script>
         const translations = {
             es: {
                 title: "TAROT EVOLUTIVO",
+                quote: "\"LO QUE NO SE HACE CONSCIENTE, SE MANIFIESTA COMO DESTINO.\"",
                 about: "Sobre Mí", aboutDesc: "Conoce mi historia.",
                 agenda: "Agenda tu cita", agendaDesc: "Reserva aquí.",
                 rates: "Tarifas", ratesDesc: "Opciones y precios.",
                 oracle: "Mensaje del día", oracleDesc: "Un consejo del universo.",
+                amulets: "Amuletos",
+                testi: "Testimonios",
                 faq: "Preguntas", faqDesc: "Respuestas frecuentes.",
                 back: "← Volver",
                 hi: "Hola, soy Victoria.",
@@ -362,10 +343,13 @@
             },
             en: {
                 title: "EVOLUTIONARY TAROT",
+                quote: "\"UNTIL YOU MAKE THE UNCONSCIOUS CONSCIOUS, IT WILL DIRECT YOUR LIFE AND YOU WILL CALL IT FATE.\"",
                 about: "About Me", aboutDesc: "My story & method.",
                 agenda: "Book Now", agendaDesc: "Reserve your reading.",
                 rates: "Rates", ratesDesc: "Prices & Options.",
                 oracle: "Daily Message", oracleDesc: "Advice from the universe.",
+                amulets: "Amulets",
+                testi: "Testimonials",
                 faq: "FAQ", faqDesc: "Common questions.",
                 back: "← Back",
                 hi: "Hi, I'm Victoria.",
@@ -382,10 +366,13 @@
             },
             fr: {
                 title: "TAROT ÉVOLUTIF",
+                quote: "\"TANT QUE VOUS N'AUREZ PAS RENDU L'INCONSCIENT CONSCIENT, IL DIRIGERA VOTRE VIE ET VOUS APPELLEREZ CELA LE DESTIN.\"",
                 about: "À Propos", aboutDesc: "Mon histoire.",
                 agenda: "Prendre RDV", agendaDesc: "Réservez ici.",
                 rates: "Tarifs", ratesDesc: "Options et prix.",
                 oracle: "Message du jour", oracleDesc: "Un conseil de l'univers.",
+                amulets: "Amulettes",
+                testi: "Témoignages",
                 faq: "FAQ", faqDesc: "Questions fréquentes.",
                 back: "← Retour",
                 hi: "Bonjour, je suis Victoria.",
@@ -403,39 +390,9 @@
         };
 
         const oracleMessages = {
-            es: [
-                "Quien mira hacia afuera, sueña; quien mira hacia adentro, despierta. (C. Jung)",
-                "Lo que niegas te somete, lo que aceptas te transforma. (C. Jung)",
-                "El Tarot es un espejo: no te muestra el futuro, te muestra tu presente para que tú crees el futuro. (A. Jodorowsky)",
-                "Tu árbol genealógico es una trampa, pero tiene una puerta de salida: la conciencia.",
-                "Haz hoy algo que nunca hayas hecho. Rompe el hábito para romper el destino.",
-                "No aspires a ser bueno, aspira a ser completo. Integra tu sombra. (C. Jung)",
-                "La sincronicidad no es casualidad, es el universo dialogando contigo.",
-                "Donde está tu miedo, ahí está tu tarea. (C. Jung)",
-                "La jaula es imaginaria. Tus límites son mentales."
-            ],
-            en: [
-                "Who looks outside, dreams; who looks inside, awakes. (C. Jung)",
-                "What you deny submits you, what you accept transforms you. (C. Jung)",
-                "Tarot is a mirror: it doesn't show the future, it shows your present so you can create the future. (A. Jodorowsky)",
-                "Your family tree is a trap, but it has an exit door: consciousness.",
-                "Do something today you've never done before. Break the habit to break the destiny.",
-                "Do not aspire to be good, aspire to be whole. Integrate your shadow. (C. Jung)",
-                "Synchronicity is not a coincidence, it is the universe speaking to you.",
-                "Where your fear is, there is your task. (C. Jung)",
-                "The cage is imaginary. Your limits are mental."
-            ],
-            fr: [
-                "Qui regarde à l'extérieur rêve ; qui regarde à l'intérieur s'éveille. (C. Jung)",
-                "Ce que tu nies te soumet, ce que tu acceptes te transforme. (C. Jung)",
-                "Le Tarot est un miroir : il ne montre pas l'avenir, il montre le présent pour que vous créiez l'avenir. (A. Jodorowsky)",
-                "Votre arbre généalogique est un piège, mais il a une porte de sortie : la conscience.",
-                "Faites aujourd'hui quelque chose que vous n'avez jamais fait. Brisez l'habitude pour briser le destin.",
-                "N'aspirez pas à être bon, aspirez à être entier. Intégrez votre ombre. (C. Jung)",
-                "La synchronicité n'est pas un hasard, c'est l'univers qui dialogue avec vous.",
-                "Là où est ta peur, là est ta tâche. (C. Jung)",
-                "La cage est imaginaire. Vos limites sont mentales."
-            ]
+            es: [ "Quien mira hacia afuera, sueña; quien mira hacia adentro, despierta. (C. Jung)", "Lo que niegas te somete, lo que aceptas te transforma. (C. Jung)", "El Tarot es un espejo: no te muestra el futuro, te muestra tu presente para que tú crees el futuro. (A. Jodorowsky)", "Tu árbol genealógico es una trampa, pero tiene una puerta de salida: la conciencia.", "Haz hoy algo que nunca hayas hecho. Rompe el hábito para romper el destino.", "No aspires a ser bueno, aspira a ser completo. Integra tu sombra. (C. Jung)", "La sincronicidad no es casualidad, es el universo dialogando contigo.", "Donde está tu miedo, ahí está tu tarea. (C. Jung)", "La jaula es imaginaria. Tus límites son mentales." ],
+            en: [ "Who looks outside, dreams; who looks inside, awakes. (C. Jung)", "What you deny submits you, what you accept transforms you. (C. Jung)", "Tarot is a mirror: it doesn't show the future, it shows your present so you can create the future. (A. Jodorowsky)", "Your family tree is a trap, but it has an exit door: consciousness.", "Do something today you've never done before. Break the habit to break the destiny.", "Do not aspire to be good, aspire to be whole. Integrate your shadow. (C. Jung)", "Synchronicity is not a coincidence, it is the universe speaking to you.", "Where your fear is, there is your task. (C. Jung)", "The cage is imaginary. Your limits are mental." ],
+            fr: [ "Qui regarde à l'extérieur rêve ; qui regarde à l'intérieur s'éveille. (C. Jung)", "Ce que tu nies te soumet, ce que tu acceptes te transforme. (C. Jung)", "Le Tarot est un miroir : il ne montre pas l'avenir, il montre le présent pour que vous créiez l'avenir. (A. Jodorowsky)", "Votre arbre généalogique est un piège, mais il a une porte de sortie : la conscience.", "Faites aujourd'hui quelque chose que vous n'avez jamais fait. Brisez l'habitude pour briser le destin.", "N'aspirez pas à être bon, aspirez à être entier. Intégrez votre ombre. (C. Jung)", "La synchronicité n'est pas un hasard, c'est l'univers qui dialogue avec vous.", "Là où est ta peur, là est ta tâche. (C. Jung)", "La cage est imaginaire. Vos limites sont mentales." ]
         };
 
         let currentLang = 'es';
@@ -448,11 +405,14 @@
             const t = translations[lang];
             
             updateText('.tr-title', t.title);
+            updateText('.tr-quote', t.quote);
             updateText('.tr-about', t.about); updateText('.tr-about-desc', t.aboutDesc);
             updateText('.tr-agenda', t.agenda); updateText('.tr-agenda-desc', t.agendaDesc);
             updateText('.tr-rates', t.rates); updateText('.tr-rates-desc', t.ratesDesc);
             updateText('.tr-oracle', t.oracle); updateText('.tr-oracle-desc', t.oracleDesc);
             updateText('.tr-faq', t.faq); updateText('.tr-faq-desc', t.faqDesc);
+            updateText('.tr-amulets', t.amulets);
+            updateText('.tr-testi', t.testi);
             
             document.querySelectorAll('.tr-back').forEach(el => el.innerText = t.back);
             document.querySelectorAll('.tr-new-card').forEach(el => el.innerText = t.newCard);
@@ -480,26 +440,52 @@
         function getNewMessage() {
             const list = oracleMessages[currentLang];
             const randomMsg = list[Math.floor(Math.random() * list.length)];
-            const textPC = document.getElementById('oracle-text-pc');
-            const textMobile = document.getElementById('oracle-text-mobile');
-            if(textPC) textPC.innerText = `"${randomMsg}"`;
-            if(textMobile) textMobile.innerText = `"${randomMsg}"`;
+            const oracleEl = document.getElementById('oracle-text');
+            if(oracleEl) oracleEl.innerText = `"${randomMsg}"`;
         }
 
-        function showDesktopSection(id) {
-            document.querySelectorAll('.desktop-section').forEach(el => el.classList.add('hidden'));
-            document.querySelectorAll('.desktop-section').forEach(el => el.classList.remove('active'));
-            document.getElementById(id).classList.remove('hidden');
-            document.getElementById(id).classList.add('active');
-        }
-        function showOracle() { showDesktopSection('desktop-mensaje'); getNewMessage(); }
+        function showSection(id) {
+            document.getElementById('desktop-home').classList.remove('active');
+            document.getElementById('mobile-home').classList.remove('active');
+            document.getElementById('mobile-home').classList.add('hidden');
+            document.getElementById('desktop-home').classList.add('hidden');
 
-        function showMobileSection(id) {
-            document.querySelectorAll('.mobile-section').forEach(el => el.classList.add('hidden'));
-            document.getElementById(id).classList.remove('hidden');
+            document.querySelectorAll('.desktop-section').forEach(el => {
+                if(el.id !== 'desktop-home') {
+                    el.classList.add('hidden');
+                    el.classList.remove('active');
+                }
+            });
+            document.querySelectorAll('.mobile-section').forEach(el => {
+                if(el.id !== 'mobile-home') {
+                    el.classList.add('hidden');
+                }
+            });
+
+            const target = document.getElementById(id);
+            if(target) {
+                target.classList.remove('hidden');
+                target.classList.add('active');
+            }
             window.scrollTo(0,0);
         }
-        function showMobileOracle() { showMobileSection('mobile-mensaje'); getNewMessage(); }
+
+        function goHome() {
+            document.querySelectorAll('.desktop-section').forEach(el => {
+                if(el.id !== 'desktop-home') el.classList.add('hidden');
+            });
+            document.querySelectorAll('.mobile-section').forEach(el => {
+                if(el.id !== 'mobile-home') el.classList.add('hidden');
+            });
+
+            document.getElementById('desktop-home').classList.remove('hidden');
+            document.getElementById('desktop-home').classList.add('active');
+            document.getElementById('mobile-home').classList.remove('hidden');
+            
+            window.scrollTo(0,0);
+        }
+
+        function showOracle() { showSection('desktop-mensaje'); getNewMessage(); }
 
         getNewMessage();
     </script>
