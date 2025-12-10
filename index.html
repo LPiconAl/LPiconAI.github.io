@@ -79,25 +79,17 @@
             position: absolute;
             cursor: pointer;
             border-radius: 12px;
-            z-index: 10; /* Asegura que el botón esté encima de la imagen */
-            /* Si quieres ver los botones rojos para probar, quita los símbolos de comentario abajo: */
-            /* background: rgba(255, 0, 0, 0.3); */
+            z-index: 10;
         }
 
-        /* AJUSTE DE POSICIONES (Para tu diseño de 1 carta izq + 6 cartas derecha) */
-        
-        /* Carta Grande Izquierda: Sobre Mí */
+        /* AJUSTE DE POSICIONES */
         .area-sobremi { top: 18%; left: 7%; width: 21%; height: 54%; }
-        
-        /* Fila de Arriba */
-        .area-agenda { top: 8%; left: 30%; width: 20%; height: 38%; } /* Agenda tu cita */
-        .area-mensaje { top: 8%; left: 52%; width: 20%; height: 38%; } /* Mensaje del día */
-        .area-amuletos { top: 8%; left: 74%; width: 20%; height: 38%; } /* Amuletos */
-        
-        /* Fila de Abajo */
-        .area-tarifas { top: 49%; left: 30%; width: 20%; height: 38%; } /* Tarifas */
-        .area-testimonios { top: 49%; left: 52%; width: 20%; height: 38%; } /* Testimonios */
-        .area-faq { top: 49%; left: 74%; width: 20%; height: 38%; } /* FAQ */
+        .area-agenda { top: 8%; left: 30%; width: 20%; height: 38%; } 
+        .area-mensaje { top: 8%; left: 52%; width: 20%; height: 38%; } 
+        .area-amuletos { top: 8%; left: 74%; width: 20%; height: 38%; } 
+        .area-tarifas { top: 49%; left: 30%; width: 20%; height: 38%; } 
+        .area-testimonios { top: 49%; left: 52%; width: 20%; height: 38%; } 
+        .area-faq { top: 49%; left: 74%; width: 20%; height: 38%; } 
 
         /* --- MÓVIL --- */
         .mobile-nav { display: none; }
@@ -140,7 +132,7 @@
                 <div class="click-layer">
                     <div class="click-area area-sobremi" onclick="showSection('sobre-mi')" title="Sobre Mí"></div>
                     
-                    <a href="https://calendly.com/victoria-picon90/30min" class="click-area area-agenda" target="_blank" title="Agenda tu cita"></a>
+                    <a href="https://calendly.com/victoria-tarot/30min" class="click-area area-agenda" target="_blank" title="Agenda tu cita"></a>
                     
                     <div class="click-area area-mensaje" onclick="showSection('mensaje')" title="Mensaje del día"></div>
                     <div class="click-area area-amuletos" onclick="alert('Sección Amuletos próximamente')" title="Amuletos"></div>
@@ -154,6 +146,44 @@
                 <h1 style="margin-bottom: 30px; font-size: 2rem; text-shadow: 0 0 10px #d8bfd8;">TAROT EVOLUTIVO</h1>
                 <div class="mobile-links">
                     <a class="mobile-btn" onclick="showSection('sobre-mi')">🔮 Sobre Mí</a>
-                    <a href="https://calendly.com/victoria-picon90/30min" class="mobile-btn" target="_blank">💑 Agenda tu cita</a>
+                    
+                    <a href="https://calendly.com/victoria-tarot/30min" class="mobile-btn" target="_blank">💑 Agenda tu cita</a>
+                    
                     <a class="mobile-btn" onclick="showSection('tarifas')">🎡 Tarifas</a>
-                    <a class="mobile-btn" onclick="showSection
+                    <a class="mobile-btn" onclick="showSection('mensaje')">☀️ Mensaje del día</a>
+                    <a class="mobile-btn" onclick="showSection('faq')">🌙 Preguntas Frecuentes</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="sobre-mi" class="section">
+            <button class="btn-back" onclick="showSection('home')">← Volver</button>
+            <img src="sobre-mi.png" alt="Sobre Victoria" class="content-img">
+        </div>
+
+        <div id="mensaje" class="section">
+            <button class="btn-back" onclick="showSection('home')">← Volver</button>
+            <img src="mensaje.png" alt="Mensaje" class="content-img">
+        </div>
+
+        <div id="faq" class="section">
+            <button class="btn-back" onclick="showSection('home')">← Volver</button>
+            <img src="faq.png" alt="FAQ" class="content-img">
+        </div>
+
+        <div id="tarifas" class="section">
+            <button class="btn-back" onclick="showSection('home')">← Volver</button>
+            <img src="tarifas.png" alt="Tarifas" class="content-img">
+        </div>
+
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
