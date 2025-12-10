@@ -29,73 +29,84 @@
 
         h1, h2, h3 { font-family: 'Cinzel', serif; }
         
-        /* --- ESTILOS COMUNES --- */
         .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 20px; text-align: center; }
         .hidden { display: none !important; }
 
-        /* --- ESTILO "PAPEL MÁGICO" (ORÁCULO) --- */
+        /* --- BOTONES DE IDIOMA --- */
+        .lang-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px;
+            border-radius: 30px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .lang-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            margin: 0 5px;
+            transition: transform 0.2s;
+            opacity: 0.7;
+        }
+        .lang-btn:hover, .lang-btn.active {
+            transform: scale(1.2);
+            opacity: 1;
+        }
+
+        /* --- ESTILO "PAPEL MÁGICO" --- */
         .paper-note {
             background-color: #fdfbf7;
             color: #2c2c2c;
             padding: 40px;
             max-width: 600px;
             margin: 40px auto;
-            font-family: 'Dancing Script', cursive; /* Letra manuscrita */
+            font-family: 'Dancing Script', cursive;
             font-size: 1.6rem;
             line-height: 1.5;
             text-align: center;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             transform: rotate(-1deg);
-            border-radius: 2px;
             position: relative;
-            background-image: linear-gradient(#fdfbf7 2px, transparent 2px), linear-gradient(90deg, #fdfbf7 2px, transparent 2px), linear-gradient(rgba(0,0,0,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,.05) 1px, transparent 1px);
-            background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
-            background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
         }
 
         .tape {
             background-color: rgba(255, 255, 255, 0.4);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-            width: 120px;
-            height: 35px;
-            position: absolute;
-            top: -15px;
-            left: 50%;
+            width: 120px; height: 35px;
+            position: absolute; top: -15px; left: 50%;
             transform: translateX(-50%) rotate(2deg);
-            backdrop-filter: blur(2px);
+        }
+
+        .btn-reload, .btn-back, .btn-back-mobile {
+            cursor: pointer;
+            font-family: 'Cinzel', serif;
+            transition: all 0.3s;
         }
 
         .btn-reload {
-            margin-top: 20px;
-            padding: 15px 30px;
-            background: var(--primary-purple);
-            color: white;
-            border: 1px solid var(--text-gold);
-            border-radius: 20px;
-            cursor: pointer;
-            font-family: 'Cinzel', serif;
-            font-size: 1rem;
-            transition: transform 0.2s;
+            margin-top: 20px; padding: 15px 30px;
+            background: var(--primary-purple); color: white;
+            border: 1px solid var(--text-gold); border-radius: 20px;
         }
-        .btn-reload:active { transform: scale(0.95); }
+        
+        .btn-back {
+            background: rgba(0,0,0,0.5); border: 1px solid white; 
+            color: white; padding: 10px 25px; border-radius: 50px;
+        }
 
-        /* =========================================
-           DISEÑO ESCRITORIO (PC)
-           ========================================= */
+        /* --- ESCRITORIO --- */
         @media (min-width: 769px) {
             .mobile-only { display: none; }
-            
-            .desktop-menu-container {
-                position: relative;
-                max-width: 900px;
-                margin: 0 auto;
-            }
+            .desktop-menu-container { position: relative; max-width: 900px; margin: 0 auto; }
             .menu-img { width: 100%; display: block; border-radius: 20px; }
-            
             .click-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
             .click-area { position: absolute; cursor: pointer; border-radius: 12px; z-index: 10; }
             
-            /* Coordenadas PC */
+            /* Posiciones PC */
             .area-sobremi { top: 18%; left: 7%; width: 21%; height: 54%; }
             .area-agenda { top: 8%; left: 30%; width: 20%; height: 38%; } 
             .area-mensaje { top: 8%; left: 52%; width: 20%; height: 38%; } 
@@ -104,19 +115,14 @@
             .area-testimonios { top: 49%; left: 52%; width: 20%; height: 38%; } 
             .area-faq { top: 49%; left: 74%; width: 20%; height: 38%; } 
 
-            .pc-content-img {
-                width: 100%; max-width: 800px; border-radius: 15px;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.5); margin-top: 20px;
-            }
+            .pc-content-img { width: 100%; max-width: 800px; border-radius: 15px; margin-top: 20px; }
         }
 
-        /* =========================================
-           DISEÑO MÓVIL
-           ========================================= */
+        /* --- MÓVIL --- */
         @media (max-width: 768px) {
             .desktop-only { display: none; }
-            
             .mobile-container { padding: 15px; display: flex; flex-direction: column; align-items: center; }
+            .lang-container { top: 10px; right: 10px; padding: 5px; }
 
             .main-title {
                 font-size: 2rem; color: var(--text-gold); margin-bottom: 30px;
@@ -125,33 +131,33 @@
             }
 
             .mobile-menu-list { display: flex; flex-direction: column; gap: 20px; width: 100%; }
-
             .menu-item {
                 display: flex; align-items: center; background: rgba(10, 10, 18, 0.6);
                 border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 15px; padding: 15px;
-                text-decoration: none; color: var(--white); transition: transform 0.2s;
+                text-decoration: none; color: var(--white);
             }
-            .menu-item:active { transform: scale(0.98); background: rgba(94, 59, 99, 0.4); }
-
-            .menu-icon { width: 50px; height: auto; margin-right: 20px; filter: sepia(0.2) drop-shadow(0 0 5px rgba(255,255,255,0.2)); }
+            .menu-icon { width: 50px; height: auto; margin-right: 20px; filter: sepia(0.2); }
             .menu-text h3 { font-size: 1.2rem; color: var(--text-gold); margin-bottom: 5px; text-align: left; }
-            .menu-text p { font-size: 0.9rem; color: #ccc; text-align: left; font-weight: 300; }
+            .menu-text p { font-size: 0.9rem; color: #ccc; text-align: left; }
 
             .text-content { text-align: left; background: rgba(0, 0, 0, 0.4); padding: 20px; border-radius: 15px; margin-top: 10px; width: 100%; }
-            .text-content p { margin-bottom: 15px; line-height: 1.6; font-size: 1rem; }
+            .text-content p { margin-bottom: 15px; line-height: 1.6; }
             .text-content h2 { color: var(--text-gold); margin-bottom: 20px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 10px; }
-
-            .about-grid { display: flex; flex-direction: column; gap: 20px; }
-            .my-photo { width: 100%; border-radius: 15px; border: 1px solid var(--text-gold); box-shadow: 0 0 15px rgba(240, 230, 210, 0.2); }
-
+            
+            .my-photo { width: 100%; border-radius: 15px; border: 1px solid var(--text-gold); margin: 10px 0; }
             .list-item { margin-bottom: 25px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; }
             .list-title { font-family: 'Cinzel', serif; color: var(--text-gold); font-size: 1.1rem; margin-bottom: 5px; }
-
-            .btn-back-mobile { background: transparent; border: 1px solid var(--white); color: var(--white); padding: 10px 20px; border-radius: 30px; margin-bottom: 20px; font-family: 'Cinzel', serif; width: 100%; }
+            .btn-back-mobile { background: transparent; border: 1px solid var(--white); color: var(--white); padding: 10px 20px; border-radius: 30px; margin-bottom: 20px; width: 100%; }
         }
     </style>
 </head>
 <body>
+
+    <div class="lang-container">
+        <button class="lang-btn active" onclick="setLanguage('es')">🇪🇸</button>
+        <button class="lang-btn" onclick="setLanguage('en')">🇬🇧</button>
+        <button class="lang-btn" onclick="setLanguage('fr')">🇫🇷</button>
+    </div>
 
     <div class="container desktop-only">
         <div id="desktop-home" class="desktop-section active">
@@ -161,137 +167,261 @@
                     <div class="click-area area-sobremi" onclick="showDesktopSection('desktop-sobre-mi')"></div>
                     <a href="https://calendly.com/victoria-tarot/30min" class="click-area area-agenda" target="_blank"></a>
                     <div class="click-area area-mensaje" onclick="showOracle()"></div>
-                    <div class="click-area area-amuletos" onclick="alert('Próximamente')"></div>
+                    <div class="click-area area-amuletos" onclick="alert('Próximamente / Coming Soon / À venir')"></div>
                     <div class="click-area area-tarifas" onclick="showDesktopSection('desktop-tarifas')"></div>
-                    <div class="click-area area-testimonios" onclick="alert('Próximamente')"></div>
+                    <div class="click-area area-testimonios" onclick="alert('Próximamente / Coming Soon / À venir')"></div>
                     <div class="click-area area-faq" onclick="showDesktopSection('desktop-faq')"></div>
                 </div>
             </div>
         </div>
 
         <div id="desktop-sobre-mi" class="desktop-section hidden">
-            <button class="btn-back" onclick="showDesktopSection('desktop-home')" style="color:white; background:transparent; border:1px solid white; padding:10px; border-radius:20px; cursor:pointer;">← Volver</button> <br>
+            <button class="btn-back tr-back" onclick="showDesktopSection('desktop-home')">← Volver</button> <br>
             <img src="sobre-mi.png" class="pc-content-img">
         </div>
         <div id="desktop-tarifas" class="desktop-section hidden">
-            <button class="btn-back" onclick="showDesktopSection('desktop-home')" style="color:white; background:transparent; border:1px solid white; padding:10px; border-radius:20px; cursor:pointer;">← Volver</button> <br>
+            <button class="btn-back tr-back" onclick="showDesktopSection('desktop-home')">← Volver</button> <br>
             <img src="tarifas.png" class="pc-content-img">
         </div>
         <div id="desktop-faq" class="desktop-section hidden">
-            <button class="btn-back" onclick="showDesktopSection('desktop-home')" style="color:white; background:transparent; border:1px solid white; padding:10px; border-radius:20px; cursor:pointer;">← Volver</button> <br>
+            <button class="btn-back tr-back" onclick="showDesktopSection('desktop-home')">← Volver</button> <br>
             <img src="faq.png" class="pc-content-img">
         </div>
         
         <div id="desktop-mensaje" class="desktop-section hidden">
-            <button class="btn-back" onclick="showDesktopSection('desktop-home')" style="color:white; background:transparent; border:1px solid white; padding:10px; border-radius:20px; cursor:pointer;">← Volver</button>
+            <button class="btn-back tr-back" onclick="showDesktopSection('desktop-home')">← Volver</button>
             <div class="paper-note">
                 <div class="tape"></div>
-                <p id="oracle-text-pc">Cargando tu mensaje...</p>
+                <p id="oracle-text-pc">...</p>
             </div>
-            <button class="btn-reload" onclick="getNewMessage()">Sacar otra carta</button>
+            <button class="btn-reload tr-new-card" onclick="getNewMessage()">Sacar otra carta</button>
         </div>
     </div>
 
-
     <div class="mobile-container mobile-only">
         <div id="mobile-home" class="mobile-section">
-            <h1 class="main-title">TAROT EVOLUTIVO</h1>
+            <h1 class="main-title tr-title">TAROT EVOLUTIVO</h1>
             <div class="mobile-menu-list">
                 <div class="menu-item" onclick="showMobileSection('mobile-sobre-mi')">
                     <img src="86008.png" class="menu-icon">
-                    <div class="menu-text"><h3>Sobre Mí</h3><p>Conoce mi historia.</p></div>
+                    <div class="menu-text"><h3 class="tr-about">Sobre Mí</h3><p class="tr-about-desc">Conoce mi historia.</p></div>
                 </div>
                 <a href="https://calendly.com/victoria-tarot/30min" target="_blank" class="menu-item" style="border-color: #f0e6d2; background: rgba(94, 59, 99, 0.6);">
                     <img src="86003.png" class="menu-icon">
-                    <div class="menu-text"><h3>Agenda tu cita</h3><p>Reserva aquí.</p></div>
+                    <div class="menu-text"><h3 class="tr-agenda">Agenda tu cita</h3><p class="tr-agenda-desc">Reserva aquí.</p></div>
                 </a>
                 <div class="menu-item" onclick="showMobileSection('mobile-tarifas')">
                     <img src="86004.png" class="menu-icon">
-                    <div class="menu-text"><h3>Tarifas</h3><p>Opciones y precios.</p></div>
+                    <div class="menu-text"><h3 class="tr-rates">Tarifas</h3><p class="tr-rates-desc">Opciones y precios.</p></div>
                 </div>
                 <div class="menu-item" onclick="showMobileOracle()"> 
                     <img src="86002.png" class="menu-icon">
-                    <div class="menu-text"><h3>Mensaje del día</h3><p>Un consejo del universo.</p></div>
+                    <div class="menu-text"><h3 class="tr-oracle">Mensaje del día</h3><p class="tr-oracle-desc">Un consejo del universo.</p></div>
                 </div>
                 <div class="menu-item" onclick="showMobileSection('mobile-faq')">
                     <img src="86006.png" class="menu-icon">
-                    <div class="menu-text"><h3>Preguntas</h3><p>Respuestas frecuentes.</p></div>
+                    <div class="menu-text"><h3 class="tr-faq">Preguntas</h3><p class="tr-faq-desc">Respuestas frecuentes.</p></div>
                 </div>
             </div>
         </div>
 
         <div id="mobile-sobre-mi" class="mobile-section hidden">
-            <button class="btn-back-mobile" onclick="showMobileSection('mobile-home')">← Volver al Menú</button>
+            <button class="btn-back-mobile tr-back" onclick="showMobileSection('mobile-home')">← Volver</button>
             <div class="text-content about-grid">
-                <h2>Hola, soy Victoria.</h2>
-                <img src="foto1.jpg" class="my-photo" alt="Foto Victoria 1">
-                <p>Desde que tengo memoria, he sentido un imán hacia lo místico, la magia y todo aquello que nuestros ojos no ven a simple vista. Mientras otros miraban hacia afuera, yo siempre sentí curiosidad por mirar hacia adentro, hacia lo desconocido.</p>
-                <img src="foto2.jpg" class="my-photo" alt="Foto Victoria 2">
-                <p>Hoy utilizo el Tarot como herramienta terapéutica y evolutiva. Mi objetivo es acompañarte a descifrar tus bloqueos y devolverte el poder sobre tu destino. Estoy aquí para poner mi experiencia al servicio de quienes, como tú, necesitan encontrarse y sanar.</p>
+                <h2 class="tr-hi">Hola, soy Victoria.</h2>
+                <img src="foto1.jpg" class="my-photo">
+                <p class="tr-bio-1">Desde que tengo memoria, he sentido un imán hacia lo místico...</p>
+                <img src="foto2.jpg" class="my-photo">
+                <p class="tr-bio-2">Hoy utilizo el Tarot como herramienta terapéutica y evolutiva...</p>
             </div>
         </div>
 
         <div id="mobile-tarifas" class="mobile-section hidden">
-            <button class="btn-back-mobile" onclick="showMobileSection('mobile-home')">← Volver al Menú</button>
+            <button class="btn-back-mobile tr-back" onclick="showMobileSection('mobile-home')">← Volver</button>
             <div class="text-content">
-                <h2>Mis Tarifas</h2>
-                <div class="list-item"><div class="list-title">1. 🌑 LUNA CRECIENTE (20€)</div><p>15 Min. Respuesta rápida.</p></div>
-                <div class="list-item"><div class="list-title">2. 🌓 CUARTO CRECIENTE (40€)</div><p>30 Min. Un tema (Amor/Trabajo).</p></div>
-                <div class="list-item"><div class="list-title">3. 🌔 LUNA GIBOSA (60€)</div><p>45 Min. Patrones y bloqueos.</p></div>
-                <div class="list-item"><div class="list-title">4. 🌕 LUNA LLENA (80€)</div><p>60 Min. Lectura completa.</p></div>
+                <h2 class="tr-rates">Mis Tarifas</h2>
+                <div class="list-item"><div class="list-title tr-t1-title">1. 🌑 LUNA CRECIENTE (20€)</div><p class="tr-t1-desc">15 Min. Respuesta rápida.</p></div>
+                <div class="list-item"><div class="list-title tr-t2-title">2. 🌓 CUARTO CRECIENTE (40€)</div><p class="tr-t2-desc">30 Min. Un tema (Amor/Trabajo).</p></div>
+                <div class="list-item"><div class="list-title tr-t3-title">3. 🌔 LUNA GIBOSA (60€)</div><p class="tr-t3-desc">45 Min. Patrones y bloqueos.</p></div>
+                <div class="list-item"><div class="list-title tr-t4-title">4. 🌕 LUNA LLENA (80€)</div><p class="tr-t4-desc">60 Min. Lectura completa.</p></div>
             </div>
         </div>
 
         <div id="mobile-faq" class="mobile-section hidden">
-            <button class="btn-back-mobile" onclick="showMobileSection('mobile-home')">← Volver al Menú</button>
+            <button class="btn-back-mobile tr-back" onclick="showMobileSection('mobile-home')">← Volver</button>
             <div class="text-content">
-                <h2>Preguntas</h2>
-                <div class="list-item"><div class="list-title">¿Me dirás tragedias?</div><p>No, el Tarot Evolutivo es para sanar, no para asustar.</p></div>
-                <div class="list-item"><div class="list-title">¿Funciona a distancia?</div><p>Sí, la energía no tiene fronteras.</p></div>
-                <div class="list-item"><div class="list-title">¿Cómo reservo mi cita?</div><p>Ve al botón de "Agenda tu cita" y elige en el calendario.</p></div>
+                <h2 class="tr-faq">Preguntas</h2>
+                <div class="list-item"><div class="list-title tr-q1">¿Me dirás tragedias?</div><p class="tr-a1">No, el Tarot Evolutivo es para sanar.</p></div>
+                <div class="list-item"><div class="list-title tr-q2">¿Funciona a distancia?</div><p class="tr-a2">Sí, la energía no tiene fronteras.</p></div>
+                <div class="list-item"><div class="list-title tr-q3">¿Cómo reservo?</div><p class="tr-a3">Botón Agenda tu cita.</p></div>
             </div>
         </div>
 
         <div id="mobile-mensaje" class="mobile-section hidden">
-            <button class="btn-back-mobile" onclick="showMobileSection('mobile-home')">← Volver al Menú</button>
+            <button class="btn-back-mobile tr-back" onclick="showMobileSection('mobile-home')">← Volver</button>
             <div class="paper-note">
                 <div class="tape"></div>
-                <p id="oracle-text-mobile">Conectando con el universo...</p>
+                <p id="oracle-text-mobile">...</p>
             </div>
-            <button class="btn-reload" onclick="getNewMessage()">✨ Sacar otra Carta</button>
+            <button class="btn-reload tr-new-card" onclick="getNewMessage()">✨ Sacar otra Carta</button>
         </div>
     </div>
 
     <script>
-        // === LISTA DE MENSAJES (Inspirados en Jodorowsky y Jung) ===
-        const messages = [
-            "Quien mira hacia afuera, sueña; quien mira hacia adentro, despierta. (C. Jung)",
-            "Lo que niegas te somete, lo que aceptas te transforma. (C. Jung)",
-            "El Tarot es un espejo: no te muestra el futuro, te muestra tu presente para que tú crees el futuro. (A. Jodorowsky)",
-            "Tu árbol genealógico es una trampa, pero tiene una puerta de salida: la conciencia. (A. Jodorowsky)",
-            "Hasta que lo inconsciente no se haga consciente, el subconsciente seguirá dirigiendo tu vida y tú lo llamarás destino. (C. Jung)",
-            "Haz hoy algo que nunca hayas hecho. Rompe el hábito para romper el destino. (Psicomagia)",
-            "No aspires a ser bueno, aspira a ser completo. Integra tu sombra. (C. Jung)",
-            "La familia es un tesoro, pero también una cárcel. Tienes la llave para salir y sanar. (A. Jodorowsky)",
-            "La sincronicidad no es casualidad, es el universo dialogando contigo.",
-            "Lo que te irrita de los demás es solo una proyección de lo que no has resuelto en ti mismo. (C. Jung)",
-            "Para sanar, debes dejar de ser una víctima de tu pasado y convertirte en el héroe de tu futuro.",
-            "El pájaro rompe el cascarón. El huevo es el mundo. Quien quiera nacer, tiene que destruir un mundo. (Hesse/Jung)",
-            "Eres el resultado de tus antepasados, pero eres libre de no repetir sus errores.",
-            "Donde está tu miedo, ahí está tu tarea. (C. Jung)",
-            "La jaula es imaginaria. Tus límites son mentales. (A. Jodorowsky)",
-            "Todo lo que nos irrita de otros nos lleva a un entendimiento de nosotros mismos. (C. Jung)",
-            "La vida no es lo que te pasa, es lo que haces con lo que te pasa.",
-            "Si quieres cambiar el mundo, empieza por transformar tu propia conciencia.",
-            "El encuentro de dos personalidades es como el contacto de dos sustancias químicas: si hay alguna reacción, ambas se transforman. (C. Jung)",
-            "Cesa de definirte: concédete todas las posibilidades de ser, cambia de caminos cuantas veces te sea necesario. (A. Jodorowsky)"
-        ];
+        // --- TEXTOS EN 3 IDIOMAS ---
+        const translations = {
+            es: {
+                title: "TAROT EVOLUTIVO",
+                about: "Sobre Mí", aboutDesc: "Conoce mi historia.",
+                agenda: "Agenda tu cita", agendaDesc: "Reserva aquí.",
+                rates: "Tarifas", ratesDesc: "Opciones y precios.",
+                oracle: "Mensaje del día", oracleDesc: "Un consejo del universo.",
+                faq: "Preguntas", faqDesc: "Respuestas frecuentes.",
+                back: "← Volver",
+                hi: "Hola, soy Victoria.",
+                bio1: "Desde que tengo memoria, he sentido un imán hacia lo místico, la magia y todo aquello que nuestros ojos no ven a simple vista. Mientras otros miraban hacia afuera, yo siempre sentí curiosidad por mirar hacia adentro, hacia lo desconocido.",
+                bio2: "Hoy utilizo el Tarot como herramienta terapéutica y evolutiva. Mi objetivo es acompañarte a descifrar tus bloqueos y devolverte el poder sobre tu destino. Estoy aquí para poner mi experiencia al servicio de quienes, como tú, necesitan encontrarse y sanar.",
+                t1t: "1. 🌑 LUNA CRECIENTE (20€)", t1d: "15 Min. Respuesta rápida.",
+                t2t: "2. 🌓 CUARTO CRECIENTE (40€)", t2d: "30 Min. Un tema (Amor/Trabajo).",
+                t3t: "3. 🌔 LUNA GIBOSA (60€)", t3d: "45 Min. Patrones y bloqueos.",
+                t4t: "4. 🌕 LUNA LLENA (80€)", t4d: "60 Min. Lectura completa.",
+                q1: "¿Me dirás tragedias?", a1: "No. El Tarot Evolutivo no sentencia tu futuro ni busca asustarte. Usamos las cartas para sanar y entender tu presente.",
+                q2: "¿Funciona a distancia?", a2: "¡Sí! La energía no tiene fronteras. Nos conectamos por videollamada y la sesión es tan profunda como frente a frente.",
+                q3: "¿Cómo reservo mi cita?", a3: "Ve al botón de 'Agenda tu cita', elige en el calendario el día y hora que prefieras y realiza el pago para confirmar.",
+                newCard: "✨ Sacar otra Carta"
+            },
+            en: {
+                title: "EVOLUTIONARY TAROT",
+                about: "About Me", aboutDesc: "My story & method.",
+                agenda: "Book Now", agendaDesc: "Reserve your reading.",
+                rates: "Rates", ratesDesc: "Prices & Options.",
+                oracle: "Daily Message", oracleDesc: "Advice from the universe.",
+                faq: "FAQ", faqDesc: "Common questions.",
+                back: "← Back",
+                hi: "Hi, I'm Victoria.",
+                bio1: "For as long as I can remember, I have felt a pull towards the mystical, magic, and everything invisible to the naked eye. While others looked outward, I was always curious to look inward, into the unknown.",
+                bio2: "Today I use Tarot as a therapeutic and evolutionary tool. My goal is to help you decipher your blockages and give you back power over your destiny. I am here to put my experience at the service of those who, like you, need to find themselves and heal.",
+                t1t: "1. 🌑 WAXING CRESCENT (20€)", t1d: "15 Min. Quick answer.",
+                t2t: "2. 🌓 FIRST QUARTER (40€)", t2d: "30 Min. One topic (Love/Work).",
+                t3t: "3. 🌔 WAXING GIBBOUS (60€)", t3d: "45 Min. Patterns and blocks.",
+                t4t: "4. 🌕 FULL MOON (80€)", t4d: "60 Min. Full reading.",
+                q1: "Will you predict tragedies?", a1: "No. Evolutionary Tarot does not sentence your future. We use cards to heal and understand your present.",
+                q2: "Does it work remotely?", a2: "Yes! Energy has no borders. We connect via video call and the session is just as deep as face-to-face.",
+                q3: "How do I book?", a3: "Go to the 'Book Now' button, choose your day and time on the calendar, and complete payment to confirm.",
+                newCard: "✨ Draw another card"
+            },
+            fr: {
+                title: "TAROT ÉVOLUTIF",
+                about: "À Propos", aboutDesc: "Mon histoire.",
+                agenda: "Prendre RDV", agendaDesc: "Réservez ici.",
+                rates: "Tarifs", ratesDesc: "Options et prix.",
+                oracle: "Message du jour", oracleDesc: "Un conseil de l'univers.",
+                faq: "FAQ", faqDesc: "Questions fréquentes.",
+                back: "← Retour",
+                hi: "Bonjour, je suis Victoria.",
+                bio1: "Depuis aussi longtemps que je m'en souvienne, j'ai ressenti une attraction vers le mystique, la magie et tout ce qui est invisible à l'œil nu. Alors que d'autres regardaient vers l'extérieur, j'ai toujours été curieuse de regarder vers l'intérieur.",
+                bio2: "Aujourd'hui, j'utilise le Tarot comme un outil thérapeutique et évolutif. Mon but est de vous aider à déchiffrer vos blocages et de vous redonner le pouvoir sur votre destin. Je suis ici pour mettre mon expérience au service de ceux qui ont besoin de guérir.",
+                t1t: "1. 🌑 LUNE CROISSANTE (20€)", t1d: "15 Min. Réponse rapide.",
+                t2t: "2. 🌓 PREMIER QUARTIER (40€)", t2d: "30 Min. Un sujet (Amour/Travail).",
+                t3t: "3. 🌔 LUNE GIBBEUSE (60€)", t3d: "45 Min. Schémas et blocages.",
+                t4t: "4. 🌕 PLEINE LUNE (80€)", t4d: "60 Min. Lecture complète.",
+                q1: "Allez-vous prédire des tragédies?", a1: "Non. Le Tarot Évolutif ne condamne pas votre avenir. Nous utilisons les cartes pour guérir et comprendre votre présent.",
+                q2: "Ça marche à distance ?", a2: "Oui ! L'énergie n'a pas de frontières. Nous nous connectons par vidéo et la séance est aussi profonde qu'en face à face.",
+                q3: "Comment réserver ?", a3: "Cliquez sur 'Prendre RDV', choisissez votre jour et heure sur le calendrier et effectuez le paiement pour confirmer.",
+                newCard: "✨ Tirer une autre carte"
+            }
+        };
+
+        // --- ORÁCULO EN 3 IDIOMAS ---
+        const oracleMessages = {
+            es: [
+                "Quien mira hacia afuera, sueña; quien mira hacia adentro, despierta. (C. Jung)",
+                "Lo que niegas te somete, lo que aceptas te transforma. (C. Jung)",
+                "El Tarot es un espejo: no te muestra el futuro, te muestra tu presente para que tú crees el futuro. (A. Jodorowsky)",
+                "Tu árbol genealógico es una trampa, pero tiene una puerta de salida: la conciencia.",
+                "Haz hoy algo que nunca hayas hecho. Rompe el hábito para romper el destino.",
+                "No aspires a ser bueno, aspira a ser completo. Integra tu sombra. (C. Jung)",
+                "La sincronicidad no es casualidad, es el universo dialogando contigo.",
+                "Donde está tu miedo, ahí está tu tarea. (C. Jung)",
+                "La jaula es imaginaria. Tus límites son mentales."
+            ],
+            en: [
+                "Who looks outside, dreams; who looks inside, awakes. (C. Jung)",
+                "What you deny submits you, what you accept transforms you. (C. Jung)",
+                "Tarot is a mirror: it doesn't show the future, it shows your present so you can create the future. (A. Jodorowsky)",
+                "Your family tree is a trap, but it has an exit door: consciousness.",
+                "Do something today you've never done before. Break the habit to break the destiny.",
+                "Do not aspire to be good, aspire to be whole. Integrate your shadow. (C. Jung)",
+                "Synchronicity is not a coincidence, it is the universe speaking to you.",
+                "Where your fear is, there is your task. (C. Jung)",
+                "The cage is imaginary. Your limits are mental."
+            ],
+            fr: [
+                "Qui regarde à l'extérieur rêve ; qui regarde à l'intérieur s'éveille. (C. Jung)",
+                "Ce que tu nies te soumet, ce que tu acceptes te transforme. (C. Jung)",
+                "Le Tarot est un miroir : il ne montre pas l'avenir, il montre le présent pour que vous créiez l'avenir. (A. Jodorowsky)",
+                "Votre arbre généalogique est un piège, mais il a une porte de sortie : la conscience.",
+                "Faites aujourd'hui quelque chose que vous n'avez jamais fait. Brisez l'habitude pour briser le destin.",
+                "N'aspirez pas à être bon, aspirez à être entier. Intégrez votre ombre. (C. Jung)",
+                "La synchronicité n'est pas un hasard, c'est l'univers qui dialogue avec vous.",
+                "Là où est ta peur, là est ta tâche. (C. Jung)",
+                "La cage est imaginaire. Vos limites sont mentales."
+            ]
+        };
+
+        let currentLang = 'es';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            
+            // Actualizar botones
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`.lang-btn[onclick="setLanguage('${lang}')"]`).classList.add('active');
+
+            // Actualizar textos simples
+            const t = translations[lang];
+            
+            // Textos móviles
+            updateText('.tr-title', t.title);
+            updateText('.tr-about', t.about); updateText('.tr-about-desc', t.aboutDesc);
+            updateText('.tr-agenda', t.agenda); updateText('.tr-agenda-desc', t.agendaDesc);
+            updateText('.tr-rates', t.rates); updateText('.tr-rates-desc', t.ratesDesc);
+            updateText('.tr-oracle', t.oracle); updateText('.tr-oracle-desc', t.oracleDesc);
+            updateText('.tr-faq', t.faq); updateText('.tr-faq-desc', t.faqDesc);
+            
+            // Botones volver y reload
+            document.querySelectorAll('.tr-back').forEach(el => el.innerText = t.back);
+            document.querySelectorAll('.tr-new-card').forEach(el => el.innerText = t.newCard);
+
+            // Bios y detalles
+            updateText('.tr-hi', t.hi);
+            updateText('.tr-bio-1', t.bio1);
+            updateText('.tr-bio-2', t.bio2);
+
+            // Tarifas
+            updateText('.tr-t1-title', t.t1t); updateText('.tr-t1-desc', t.t1d);
+            updateText('.tr-t2-title', t.t2t); updateText('.tr-t2-desc', t.t2d);
+            updateText('.tr-t3-title', t.t3t); updateText('.tr-t3-desc', t.t3d);
+            updateText('.tr-t4-title', t.t4t); updateText('.tr-t4-desc', t.t4d);
+
+            // FAQ
+            updateText('.tr-q1', t.q1); updateText('.tr-a1', t.a1);
+            updateText('.tr-q2', t.q2); updateText('.tr-a2', t.a2);
+            updateText('.tr-q3', t.q3); updateText('.tr-a3', t.a3);
+
+            // Actualizar oráculo al cambiar idioma
+            getNewMessage();
+        }
+
+        function updateText(selector, text) {
+            const el = document.querySelector(selector);
+            if (el) el.innerText = text;
+        }
 
         function getNewMessage() {
-            // Elegir uno al azar
-            const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+            const list = oracleMessages[currentLang];
+            const randomMsg = list[Math.floor(Math.random() * list.length)];
             
-            // Ponerlo en PC y Móvil
             const textPC = document.getElementById('oracle-text-pc');
             const textMobile = document.getElementById('oracle-text-mobile');
             
@@ -299,28 +429,23 @@
             if(textMobile) textMobile.innerText = `"${randomMsg}"`;
         }
 
-        // Lógica PC
         function showDesktopSection(id) {
             document.querySelectorAll('.desktop-section').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.desktop-section').forEach(el => el.classList.remove('active'));
             document.getElementById(id).classList.remove('hidden');
             document.getElementById(id).classList.add('active');
         }
-        function showOracle() {
-            showDesktopSection('desktop-mensaje');
-            getNewMessage(); 
-        }
+        function showOracle() { showDesktopSection('desktop-mensaje'); getNewMessage(); }
 
-        // Lógica Móvil
         function showMobileSection(id) {
             document.querySelectorAll('.mobile-section').forEach(el => el.classList.add('hidden'));
             document.getElementById(id).classList.remove('hidden');
             window.scrollTo(0,0);
         }
-        function showMobileOracle() {
-            showMobileSection('mobile-mensaje');
-            getNewMessage(); 
-        }
+        function showMobileOracle() { showMobileSection('mobile-mensaje'); getNewMessage(); }
+
+        // Iniciar oráculo
+        getNewMessage();
     </script>
 </body>
 </html>
